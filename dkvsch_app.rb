@@ -9,8 +9,8 @@ PORTS = %w[3000 3001 3002]
 
 def available_ports(self_port)
   PORTS.select {
-    @1 == self_port or
-      Net::HTTP.start('localhost', @1) { @1.head('/internal/ping').code == '200' } rescue false
+    _1 == self_port or
+      Net::HTTP.start('localhost', _1) { _1.head('/internal/ping').code == '200' } rescue false
   }
 end
 

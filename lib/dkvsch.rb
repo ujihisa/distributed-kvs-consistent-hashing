@@ -8,8 +8,8 @@ module DKVSCH
   # resolve('key31', %w[3000 3001 3002]) #=> '3001'
   # resolve('key31', %w[3000 3002]) #=> '3000'
   def self.resolve(key, available_ports)
-    port_ranges = ranges(available_ports.map { hash128(@1) })
-    belonging_index = port_ranges.find { @1.include?(hash128(key)) || @1.include?(hash128(key) + 128) }.begin
+    port_ranges = ranges(available_ports.map { hash128(_1) })
+    belonging_index = port_ranges.find { _1.include?(hash128(key)) || _1.include?(hash128(key) + 128) }.begin
     port_map = port_ranges.map(&:first).zip(available_ports).to_h
     port_map[belonging_index]
   end
@@ -20,10 +20,10 @@ module DKVSCH
 
   # ranges([30, 80, 50]) #=> [30...50, 80...158(*), 50...80] where 150 = 30+128
   def self.ranges(indices)
-    sorted_indices_loop = indices.sort + indices.sort.map { 128 + @1 }
+    sorted_indices_loop = indices.sort + indices.sort.map { 128 + _1 }
 
     indices.map {|index|
-      next_index = sorted_indices_loop.bsearch { @1 > index }
+      next_index = sorted_indices_loop.bsearch { _1 > index }
       index...next_index
     }
   end
