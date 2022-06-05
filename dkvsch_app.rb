@@ -38,7 +38,7 @@ p STORAGE
 puts '---'
 
 head '/internal/ping' do
-  @recoverying ? 503 : 200
+  200
 end
 
 get '/internal/dump-for-replicate.json' do
